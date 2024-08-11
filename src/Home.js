@@ -11,11 +11,19 @@ function Home(){
         {title: 'Third subject', body: 'Third subject body...', Auther: 'Omar', id: 3},
     ]);
 
-   
+    function handleDelete(id){
+       var newlist = blogs.filter(blog=>
+            blog.id !==id
+
+
+        );
+
+        setBolg  (newlist);
+    }
 
     return(
         <div className="Home">
-            <BlogLists blogs={blogs} />
+            <BlogLists blogs={blogs} handleDelete={handleDelete} />
             
             </div>
     );

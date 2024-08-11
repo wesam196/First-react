@@ -1,4 +1,4 @@
-function BlogLists({blogs})   {
+function BlogLists({blogs , handleDelete})   {
     return (  
 
         <div className="BlogLists">
@@ -7,6 +7,10 @@ function BlogLists({blogs})   {
             <div className="blog-preview" key={blog.id}>
                 <h2>{blog.title}</h2>
                 <p>{blog.Auther}</p>
+                <p>id = {blog.id}</p>
+                <button onClick={function second(){
+                    handleDelete(blog.id)
+                }}>Delete</button>
 
             </div>
         ))}
