@@ -11,6 +11,8 @@ function Home(){
         {title: 'Third subject', body: 'Third subject body...', Auther: 'Omar', id: 3},
     ]);
 
+    var [name, setName] = useState('Wesam');
+
     function handleDelete(id){
        var newlist = blogs.filter(blog=>
             blog.id !==id
@@ -21,14 +23,16 @@ function Home(){
         setBolg(newlist);
     }
 
-    useEffect(()=>{
+    useEffect( ()=>{
         console.log('use effect function');
-    })
+    },[name])
 
     return(
         <div className="Home">
             <BlogLists blogs={blogs} handleDelete={handleDelete} />
             
+            <p>{name}</p>
+            <button onClick={()=>{setName('Ali')}}>change name</button>
             </div>
     );
 }
