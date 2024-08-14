@@ -12,6 +12,7 @@ function Home(){
     ]);
 
     var [name, setName] = useState('Wesam');
+    var [job, setJob] = useState('Developer');
 
     function handleDelete(id){
        var newlist = blogs.filter(blog=>
@@ -25,7 +26,7 @@ function Home(){
 
     useEffect( ()=>{
         console.log('use effect function');
-    },[name])
+    },[name, job])
 
     return(
         <div className="Home">
@@ -33,6 +34,9 @@ function Home(){
             
             <p>{name}</p>
             <button onClick={()=>{setName('Ali')}}>change name</button>
+            <br />
+            <p>{job}</p>
+            <button onClick={()=>{setJob('full stack')}}>change name</button>
             </div>
     );
 }

@@ -1,0 +1,22 @@
+{
+    "blogs":[
+        {
+            "title": "First subject",
+            "body": "First subject body....",
+            "Auther": "Wesam",
+            "id": 1  
+        },
+        {
+            "title": "Second subject",
+            "body": "Second subject body....",
+            "Auther": "Ali",
+            "id": 2
+            
+        }
+        
+
+
+
+
+    ]
+}
