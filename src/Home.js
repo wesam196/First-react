@@ -5,38 +5,39 @@ import BlogLists from "./BlogLists";
 
 function Home(){
 
-    var [blogs , setBolg] = useState([
-        {title: 'First subject', body: 'First subject body....', Auther: 'Wesam', id: 1 },
-        {title: 'Second subject', body: 'Second subject body...', Auther: 'Wesam', id: 2},
-        {title: 'Third subject', body: 'Third subject body...', Auther: 'Omar', id: 3},
-    ]);
+    var [blogs , setBolg] = useState(null);
+    var [isLoading, setLoading] = useState(true);
+    var [error, setError] = useState(null);
 
-    var [name, setName] = useState('Wesam');
-    var [job, setJob] = useState('Developer');
-
-    function handleDelete(id){
-       var newlist = blogs.filter(blog=>
-            blog.id !==id
-
-
-        );
-
-        setBolg(newlist);
-    }
+    
 
     useEffect( ()=>{
-        console.log('use effect function');
-    },[name, job])
+        fetch('http://localhost:8000/blogs')
+            .then(res =>{
+                if(!res.ok){
+                     setError('unable to get data from server');
+                     throw (error);
+                }
+                setError(null);
+                return res.json() ; 
+    })
+            .then(data =>{
+                setBolg(data);
+                setLoading(false);
+    })
+            .catch(err=>{
+                //setError(err);
+                setLoading(false);
+            })
+    },[])
 
     return(
         <div className="Home">
-            <BlogLists blogs={blogs} handleDelete={handleDelete} />
-            
-            <p>{name}</p>
-            <button onClick={()=>{setName('Ali')}}>change name</button>
-            <br />
-            <p>{job}</p>
-            <button onClick={()=>{setJob('full stack')}}>change name</button>
+            {error && <h1 >{error}</h1>}
+            {isLoading && <p>Loading...</p>}
+            {blogs && <BlogLists blogs={blogs}  />}
+
+           
             </div>
     );
 }
