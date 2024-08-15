@@ -1,35 +1,12 @@
 import { useState, useEffect } from "react";
 import BlogLists from "./BlogLists";
+import useFetch from "./useFetch";
 
 
 
 function Home(){
 
-    var [blogs , setBolg] = useState(null);
-    var [isLoading, setLoading] = useState(true);
-    var [error, setError] = useState(null);
-
-    
-
-    useEffect( ()=>{
-        fetch('http://localhost:8000/blogs')
-            .then(res =>{
-                if(!res.ok){
-                     setError('unable to get data from server');
-                     throw (error);
-                }
-                setError(null);
-                return res.json() ; 
-    })
-            .then(data =>{
-                setBolg(data);
-                setLoading(false);
-    })
-            .catch(err=>{
-                //setError(err);
-                setLoading(false);
-            })
-    },[])
+    var {data:blogs, isLoading, error} = useFetch('http://localhost:8000/blogs');
 
     return(
         <div className="Home">
