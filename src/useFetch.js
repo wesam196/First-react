@@ -5,9 +5,10 @@ function useFetch(url){
     var [isLoading, setLoading] = useState(true);
     var [error, setError] = useState(null);
 
-    
 
     useEffect( ()=>{
+            
+        
         fetch(url)
             .then(res =>{
                 if(!res.ok){
@@ -25,7 +26,8 @@ function useFetch(url){
                 setError(err.message);
                 setLoading(false);
             })
-    },[])
+     
+    },[url])
 
     
     return{data, isLoading , error}
