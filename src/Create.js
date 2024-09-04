@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { json } from "react-router-dom";
 import Createrequest from "./Createrequest";
-
+import {useNavigate } from "react-router-dom";
 const Create = () => {
 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Wesam');
     const [isLoading, setLoading] = useState(false);
+    const history = useNavigate();
+
 
     const handleRequest = (e) =>{
         e.preventDefault();
@@ -15,6 +17,7 @@ const Create = () => {
         setLoading(true)
         Createrequest('http://localhost:8000/blogs', blog).then(()=>{
             setLoading(false);
+            history('/')
         });
    
     
