@@ -1,17 +1,32 @@
 import { useState } from "react";
+import { json } from "react-router-dom";
+import Createrequest from "./Createrequest";
 
 const Create = () => {
 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Wesam');
+    const [isLoading, setLoading] = useState(false);
+
+    const handleRequest = (e) =>{
+        e.preventDefault();
+        const blog =  {title, body, author};
+        setLoading(true)
+        Createrequest('http://localhost:8000/blogs', blog).then(()=>{
+            setLoading(false);
+        });
+   
+    
+    }
+
 
     return (
 
         <div className="create">
             <h2>Welcome To Create Page</h2>
-
-            <form>
+        
+            <form onSubmit={handleRequest}> 
                 <label>Blog Title</label>
                 <input type="text" required  value={title} onChange={(e)=> setTitle(e.target.value)} />
 
@@ -27,10 +42,11 @@ const Create = () => {
                 </select>
 
 
-                <button>Add blog</button>
+                 {!isLoading && <button>Add blog</button>}
+                 {isLoading && <button disabled >adding...</button>}
+             
         
             </form>
-            
         </div>
 
       )
